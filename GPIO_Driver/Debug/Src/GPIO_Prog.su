@@ -1,0 +1,4 @@
+GPIO_Prog.c:16:6:GPIO_enuInit	24	static
+GPIO_Prog.c:60:6:GPIO_enuSetPinValue	24	static
+GPIO_Prog.c:83:6:GPIO_enuTogglePinValue	24	static
+GPIO_Prog.c:104:6:GPIO_enuReadPinValue	24	static

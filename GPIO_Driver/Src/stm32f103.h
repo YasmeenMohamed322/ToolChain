@@ -1,0 +1,177 @@
+/*
+ * stm32f103.h
+ *
+ *  Created on: Mar 6, 2024
+ *      Author: user
+ */
+
+#ifndef STM32F103_H_
+#define STM32F103_H_
+
+//Various memory base addresses
+#define FLASH_BASE_ADDRESS                    0x08000000UL
+#define SRAM_BASE_ADDRESS                     0x20000000UL
+
+//AHB peripherals base address
+#define FSMC_BASE_ADDRESS                      0xA0000000UL
+#define USB_OTG_FS_BASE_ADDRESS                0x50000000UL
+#define ETHERNET_BASE_ADDRESS                  0x40028000UL
+#define CRC_BASE_ADDRESS                       0x40023000UL
+#define FLASH_INTERFACE_BASE_ADDRESS           0x40022000UL
+#define RCC_BASE_ADDRESS                       0x40021000UL
+#define DMA2_BASE_ADDRESS                      0x40020400UL
+#define DMA1_BASE_ADDRESS                      0x40020000UL
+#define SDIO_BASE_ADDRESS                      0x40018000UL
+
+//APB2 peripherals base address
+#define TIM11_BASE_ADDRESS                     0x40015400UL
+#define TIM10_BASE_ADDRESS                     0x40015000UL
+#define TIM9_BASE_ADDRESS                      0x40014C00UL
+#define ADC3_BASE_ADDRESS                      0x40013C00UL
+#define USART1_BASE_ADDRESS                    0x40013800UL
+#define TIM8_BASE_ADDRESS                      0x40013400UL
+#define SPI1_BASE_ADDRESS                      0x40013000UL
+#define TIM1_BASE_ADDRESS                      0x40012C00UL
+#define ADC2_BASE_ADDRESS                      0x40012800UL
+#define ADC1_BASE_ADDRESS                      0x40012400UL
+#define GPIO_G_BASE_ADDRESS                    0x40012000UL
+#define GPIO_F_BASE_ADDRESS                    0x40011C00UL
+#define GPIO_E_BASE_ADDRESS                    0x40011800UL
+#define GPIO_D_BASE_ADDRESS                    0x40011400UL
+#define GPIO_C_BASE_ADDRESS                    0x40011000UL
+#define GPIO_B_BASE_ADDRESS                    0x40010C00UL
+#define GPIO_A_BASE_ADDRESS                    0x40010800UL
+#define EXTI_BASE_ADDRESS                      0x40010400UL
+#define AFIO_BASE_ADDRESS                      0x40010000UL
+
+////APB1 peripherals base address
+
+//RCC Register Definition Structure
+typedef struct{
+volatile u32  RCC_CR;
+volatile u32 RCC_CFGR;
+volatile u32 RCC_CIR;
+volatile u32 RCC_APB2RSTR;
+volatile u32 RCC_APB1RSTR;
+volatile u32 RCC_AHBENR;
+volatile u32 RCC_APB2ENR;
+volatile u32 RCC_APB1ENR;
+volatile u32 RCC_BDCR;
+volatile u32 RCC_CSR;
+}RCC_REG;
+
+#define RCC      ((RCC_REG*)(RCC_BASE_ADDRESS))
+
+//GPIO Register Definition Structure
+typedef struct{
+volatile u32 GPIO_CR[2];
+volatile u32 GPIO_IDR;
+volatile u32 GPIO_ODR;
+volatile u32 GPIO_BSRR;
+volatile u32 GPIO_BRR;
+volatile u32 GPIO_LCKR;
+}GPIO_REG;
+
+#define GPIOA  ((GPIO_REG*)(GPIO_A_BASE_ADDRESS))
+#define GPIOB  ((GPIO_REG*)(GPIO_B_BASE_ADDRESS))
+#define GPIOC  ((GPIO_REG*)(GPIO_C_BASE_ADDRESS))
+#define GPIOD  ((GPIO_REG*)(GPIO_D_BASE_ADDRESS))
+#define GPIOE  ((GPIO_REG*)(GPIO_E_BASE_ADDRESS))
+#define GPIOF  ((GPIO_REG*)(GPIO_F_BASE_ADDRESS))
+#define GPIOG  ((GPIO_REG*)(GPIO_G_BASE_ADDRESS))
+//GPIO Peripheral Definition
+/*GPIO_REG* GPIOA = (GPIO_REG*)(GPIO_A_BASE_ADDRESS);
+GPIO_REG* GPIOB = (GPIO_REG*)(GPIO_B_BASE_ADDRESS);
+GPIO_REG* GPIOC = (GPIO_REG*)(GPIO_C_BASE_ADDRESS);
+GPIO_REG* GPIOD = (GPIO_REG*)(GPIO_D_BASE_ADDRESS);
+GPIO_REG* GPIOE = (GPIO_REG*)(GPIO_E_BASE_ADDRESS);
+GPIO_REG* GPIOF = (GPIO_REG*)(GPIO_F_BASE_ADDRESS);
+GPIO_REG* GPIOG = (GPIO_REG*)(GPIO_G_BASE_ADDRESS);*/
+
+
+//AFIO Register Definition Structure
+typedef struct{
+volatile u8 AFIO_EVCR;
+volatile u8 AFIO_MAPR;
+volatile u8 AFIO_EXTICR1;
+volatile u8 AFIO_EXTICR2;
+volatile u8 AFIO_EXTICR3;
+volatile u8 AFIO_EXTICR4;
+volatile u8 AFIO_MAPR2;
+}AFIO_REG;
+
+//RCC_CR Register
+
+#define RCC_PLL_RDY        25
+#define RCC_PLL_ON         24
+#define RCC_HSE_RDY        17
+#define RCC_HSE_ON         16
+#define RCC_HSI_RDY         1
+#define RCC_HSI_ON          0
+
+//RCC_CFGR register
+#define RCC_PLLMUL_21    21
+#define RCC_PLLMUL_20    20
+#define RCC_PLLMUL_19    19
+#define RCC_PLLMUL_18    18
+#define RCC_PLLXTPRE     17
+#define RCC_PLLSRC       16
+#define RCC_SW_1          1
+#define RCC_SW_0          0
+
+//RCC_AHBENR register
+#define RCC_SDIOEN         10
+#define RCC_FSMCEN         8
+#define RCC_CRCEN          6
+#define RCC_FLITFEN        4
+#define RCC_SRAMEN         2
+#define RCC_DMA2EN         1
+#define RCC_DMA1EN         0
+
+//RCC_APB2ENR
+#define RCC_TIM11EN        21
+#define RCC_TIM10EN        20
+#define RCC_TIM9EN         19
+#define RCC_ADC3EN         15
+#define RCC_USART1EN       14
+#define RCC_TIM8EN         13
+#define RCC_SPI1EN         12
+#define RCC_TIM1EN         11
+#define RCC_ADC2EN         10
+#define RCC_ADC1EN         9
+#define RCC_IOPGEN         8
+#define RCC_IOPFEN         7
+#define RCC_IOPEEN         6
+#define RCC_IOPDEN         5
+#define RCC_IOPCEN         4
+#define RCC_IOPBEN         3
+#define RCC_IOPAEN         2
+#define RCC_AFIOEN         0
+
+//RCC_APB1ENR
+#define RCC_DACEN          29
+#define RCC_PWREN          28
+#define RCC_BKPEN          27
+#define RCC_CANEN          25
+#define RCC_USBEN          23
+#define RCC_I2C2EN         22
+#define RCC_I2C1EN         21
+#define RCC_UART5EN        20
+#define RCC_UART4EN        19
+#define RCC_USART3EN       18
+#define RCC_USART2EN       17
+#define RCC_SPI3EN         15
+#define RCC_SPI2EN         14
+#define RCC_WWDGEN         11
+#define RCC_TIM14EN        8
+#define RCC_TIM13EN        7
+#define RCC_TIM12EN        6
+#define RCC_TIM7EN         5
+#define RCC_TIM6EN         4
+#define RCC_TIM5EN         3
+#define RCC_TIM4EN         2
+#define RCC_TIM3EN         1
+#define RCC_TIM2EN         0
+
+
+#endif /* STM32F103_H_ */
